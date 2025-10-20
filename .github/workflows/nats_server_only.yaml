@@ -23,7 +23,7 @@ jobs:
          uses: actions/checkout@v4
 
       -  name: Set up flyctl
-         uses: superfly/flyctl-actions/setup-flyctl@v1.5
+         uses: superfly/flyctl-actions/setup-flyctl@1.5
 
       -  run: flyctl ssh console --command 'sh ./myscript.sh'
          env:
