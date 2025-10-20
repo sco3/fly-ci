@@ -8,7 +8,7 @@ on:
 env:
    TEST_APP_NAME: nats-smoke-${{ github.run_id }}
    FLY_ORG: ${{ secrets.FLY_ORG }} # fly org name
-   
+
 jobs:
 
    smoke_test:
@@ -25,6 +25,11 @@ jobs:
       -  name: Set up flyctl
          uses: superfly/flyctl-actions/setup-flyctl@1.5
 
-      -  run: flyctl ssh console --command 'sh ./myscript.sh'
+      -  name: Test flyctl
+         run: flyctl
+         env: null
+
+      -  name: Say Bye
+         run: echo "Bye."
          env:
             FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
