@@ -7,22 +7,24 @@ on:
 
 env:
    TEST_APP_NAME: nats-smoke-${{ github.run_id }}
-# fly org name
-   FLY_ORG: ${{ secrets.FLY_ORG }}
+   FLY_ORG: ${{ secrets.FLY_ORG }} # fly org name
+   
 jobs:
 
    smoke_test:
       runs-on: ubuntu-latest
       steps:
-# application name
+
 
       -  name: Say Hello
          run: echo "Hello Workflow! This job is running correctly."
 
       -  name: checkout
          uses: actions/checkout@v4
-            
+
       -  name: Set up flyctl
-         uses: superfly/flyctl-actions/setup@master
+         uses: superfly/flyctl-actions/setup-flyctl@v1.5
+
+      -  run: flyctl ssh console --command 'sh ./myscript.sh'
          env:
             FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
