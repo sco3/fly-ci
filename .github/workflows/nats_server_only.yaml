@@ -25,13 +25,11 @@ jobs:
       -  name: Set up flyctl
          uses: superfly/flyctl-actions/setup-flyctl@1.5
 
+      -  name: Test flyctl
+         run: flyctl
+         env: null
+
       -  name: Say Bye
          run: echo "Bye."
-
-
-#      -  run: flyctl ssh console --command 'sh ./myscript.sh'
-# ------------------
-# Orphaned comments:
-# ------------------
-# Was at begin of line:33 :#         env:
-# Was at begin of line:34 :#            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+         env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
