@@ -24,9 +24,6 @@ jobs:
 
 
       -  name: Setup flyctl
-         uses: superfly/flyctl-actions/setup@master
+         uses: superfly/flyctl-actions@v1
          with:
             token: ${{ secrets.FLY_API_TOKEN }}
-
-      -  name: Create Fly App
-         run: flyctl apps create $TEST_APP_NAME --org $FLY_ORG
