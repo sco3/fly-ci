@@ -1,0 +1,44 @@
+{
+  "name": "NATS Server Smoke Test",
+  "on": {
+    "push": {
+      "branches": [
+        "main"
+      ]
+    }
+  },
+  "env": {
+    "TEST_APP_NAME": "nats-smoke-${{ github.run_id }}",
+    "FLY_ORG": "${{ secrets.FLY_ORG }}"
+  },
+  "jobs": {
+    "smoke_test": {
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "name": "Say Hello",
+          "run": "echo \"Hello Workflow! This job is running correctly.\""
+        },
+        {
+          "name": "checkout",
+          "uses": "actions/checkout@v4"
+        },
+        {
+          "name": "Set up flyctl",
+          "uses": "superfly/flyctl-actions/setup-flyctl@1.5"
+        },
+        {
+          "name": "Test flyctl",
+          "run": "flyctl",
+          "env": {
+            "FLY_API_TOKEN": "${{ secrets.FLY_API_TOKEN }}"
+          }
+        },
+        {
+          "name": "Say Bye",
+          "run": "echo \"Bye.\""
+        }
+      ]
+    }
+  }
+}
