@@ -1,19 +1,32 @@
 name: NATS Server Smoke Test
 
 on:
-  push:
-    branches:
+   push:
+      branches:
       - main
 
 env:
-  # application name
-  TEST_APP_NAME: nats-smoke-${{ github.run_id }}
-  # fly org name
-  FLY_ORG: ${{ secrets.FLY_ORG }}
-  
-jobs:  
-  smoke_test: 
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Say Hello
-        run: echo "Hello Workflow! This job is running correctly."
+   TEST_APP_NAME: nats-smoke-${{ github.run_id }}
+# fly org name
+   FLY_ORG: ${{ secrets.FLY_ORG }}
+jobs:
+
+   smoke_test:
+      runs-on: ubuntu-latest
+      steps:
+# application name
+
+      -  name: Say Hello
+         run: echo "Hello Workflow! This job is running correctly."
+
+      -  name: checkout
+         uses: actions/checkout@v4
+
+
+      -  name: Setup flyctl
+         uses: superfly/flyctl-actions/setup@master
+         with:
+            token: ${{ secrets.FLY_API_TOKEN }}
+
+      -  name: Create Fly App
+         run: flyctl apps create $TEST_APP_NAME --org $FLY_ORG
