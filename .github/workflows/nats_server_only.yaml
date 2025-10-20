@@ -24,6 +24,6 @@ jobs:
 
 
       -  name: Setup flyctl
-         uses: superfly/flyctl-actions@v1
+         uses: uses: superfly/flyctl-actions/setup@master
          with:
             token: ${{ secrets.FLY_API_TOKEN }}
